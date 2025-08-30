@@ -4,16 +4,17 @@
 
 int main(int argc, char const *argv[])
 {
-    if(argc != 2){
-        std::cout << "Usage: >ascii <ImageName.extension>\n";
-        std::cout << "Enter Image name with Extension" << std::endl;
-        return EXIT_FAILURE;
+    // Check if the user provided an image path
+    if (argc < 2) {
+        std::cout << "Error: Please provide an image file.\n";
+        std::cout << "Usage: ./ascii <path_to_image> or ascii.exe <path_to_image>\n";
+        return EXIT_FAILURE; // Exit
     }
+    const char* filename = argv[1];
     // A simple 10-level ramp
     std::string asciiRamp = " .:-=+*#%@";
     
     int width, height, channels,maxIdx = asciiRamp.length() - 1;
-    const char* filename = argv[1];
     auto image = stbi_load(filename,&width,&height,&channels,0);
     if(image == NULL){
         std::cout<<"Image is not found, or cannot be loaded.\n";
