@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
     // A simple 10-level ramp
     std::string asciiRamp = " .:-=+*#%@";
     
-    int width, height, channels;
+    int width, height, channels,maxIdx = asciiRamp.length() - 1;
     const char* filename = argv[1];
     auto image = stbi_load(filename,&width,&height,&channels,0);
     if(image == NULL){
@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
             int r = image[index], g = image[index + 1], b = image[index + 2];
             
             float brigthness = (r+g+b)/3.0;
-            int map_to_index = (brigthness/255.0)*9;
+            int map_to_index = (brigthness/255.0)*maxIdx;
             std::cout << asciiRamp[map_to_index];
         }
         std::cout<<"\n";
